@@ -1,28 +1,10 @@
 #!/usr/bin/env python3
-"""
-DealerForge CLAIM — Working Demo (single-file Streamlit app).
-Gate A · synthetic data only · advisory only. Protect what you earned. Capture what you're legitimately owed.
-The system recommends; a human decides and acts; the OEM determines. No external action, no asserted values.
-"""
+# DealerForge CLAIM - Working Demo (single-file Streamlit app).
+# Gate A | synthetic data only | advisory only.
 import streamlit as st
 import pandas as pd
 
-# ===== inlined: data =====
-"""
-claim/data.py — synthetic repair-order fixtures for the DealerForge CLAIM working demo.
-
-SYNTHETIC DATA ONLY (Gate A). No real customers, vehicles, or claims.
-- VINs are tokenized placeholders (VINTOK-...).
-- Dollar figures are ILLUSTRATIVE SYNTHETIC EXPOSURE (amounts already on the RO at chargeback risk),
-  NOT recoverable dollars and NOT asserted OEM values.
-- Module B (recovery) carries NO dollar values — "candidate to verify" only.
-
-Reason-code taxonomy (audit-calibrated risk patterns, NOT universal OEM policy):
-  T Diagnostic Operation Discrepancies · L Designated-Management Authorization Missing ·
-  E Add-On Operations · K Required Specs Not Recorded · M Tech Notes Do Not Support Repair ·
-  C Labor Not Supported · B Non-Warranty Item · N Missing Claims
-"""
-
+# ===== data =====
 REASON_CODES = {
     "T": "Diagnostic Operation Discrepancies",
     "L": "Designated-Management Authorization Missing",
@@ -364,16 +346,7 @@ VALIDATION_TARGETS = [
     ("Security incidents / unauthorized external actions", "Any submit/write/email/financial action", "0 (hard)"),
 ]
 
-# ===== inlined: engine =====
-"""
-claim/engine.py — dual-pass CLAIM logic + PCS lifecycle (pure Python, no Streamlit).
-
-Advisory only. Risk first (Module A), recovery second (Module B, "candidate to verify").
-Never approves/submits/determines claimability. The system recommends; a human decides; a human
-acts; the OEM determines. Findings carry an append-only audit trail and a separate external-action
-register. NO dollar value is asserted for recovery; Module A "exposure" = synthetic amounts already on
-the RO at chargeback risk (illustrative), never recoverable dollars.
-"""
+# ===== engine =====
 import datetime
 from collections import Counter, defaultdict
 
@@ -486,8 +459,7 @@ def portfolio_summary(cases=None):
         "per_ro": per_ro,
     }
 
-# ===== inlined: branding =====
-"""claim/branding.py — palette, CSS, and shared UI helpers for the Streamlit demo."""
+# ===== branding =====
 import streamlit as st
 
 NAVY = "#1d2226"; INK = "#20262b"; STEEL = "#6b7480"; LINE = "#e2e0da"
@@ -564,6 +536,7 @@ def sidebar_brand():
                     f'<b style="font-size:15px;color:{NAVY}">DealerForge</b></div>', unsafe_allow_html=True)
         st.caption("CLAIM — Warranty Audit Protection & Supported Recovery")
         st.caption("Gate A · synthetic · advisory only")
+
 
 # ============================ UI (single-file multipage) ============================
 A_OPTIONS = ["CONFIRM_RISK", "DISMISS_FALSE_POSITIVE", "PENDING"]
